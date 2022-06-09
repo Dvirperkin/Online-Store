@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/admin.js"></script>
 </head>
 <body>
     <a href="/logout"><button>Logout</button></a>
+
+    <div>
+        <form id="AddBookForm" action="/admin/api/addBook" method="post">
+            <label>Book ID</label>
+            <input type="text" id="BookID"/>
+            <label>Book Name</label>
+            <input type="text", id="BookName"/>
+            <label>Price</label>
+            <input type="text" id="Price"/>
+            <label>Discount</label>
+            <input type="text" id="Discount"/>
+            <button type="submit">Add</button>
+            <button type="reset">Clear</button>
+        </form>
+    </div>
 </body>
 </html>
