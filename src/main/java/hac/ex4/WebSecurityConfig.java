@@ -29,7 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole("ADMIN")
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/",true)
                 .permitAll();
     }
 }

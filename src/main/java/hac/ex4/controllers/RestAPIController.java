@@ -1,4 +1,4 @@
-package hac.ex4;
+package hac.ex4.controllers;
 
 import hac.ex4.database.Book;
 import hac.ex4.database.BookRepository;
@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin/api")
 public class RestAPIController {
 
     @Autowired
