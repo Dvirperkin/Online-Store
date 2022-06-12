@@ -28,40 +28,40 @@ public class RestAPIController {
     }
 
     @PostMapping(value = "/addBook")
-    public ResponseEntity addBook(@Valid Book book, BindingResult result) {
+    public ResponseEntity addBook(@Valid @RequestBody Book book, BindingResult result) {
 
         System.out.println("addBook");
-//        // Spring validation according to User @Entity definition
-//        if (result.hasErrors()) {
-//            return "some-error-page"; // you don’t necessarily need a full UI response
-//            // if the error is not normal behavior
-//        }
-        //bookRepository.save(book);
+        // Spring validation according to User @Entity definition
+        if (result.hasErrors()) {
+            ResponseEntity.ok(HttpStatus.BAD_REQUEST); // you don’t necessarily need a full UI response
+            // if the error is not normal behavior
+        }
+        bookRepository.save(book);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PutMapping(value = "/update/{id}")
-    public String updateBook(@PathVariable("id") final Long id, @Valid Book bk, BindingResult result, Model model) {
+    public String updateBook(@PathVariable("id") final Long id, @Valid Book bk, BindingResult result) {
         if (result.hasErrors()) {
             bk.setId(id);
             return "update-book";
         }
 
-//        Book b = bookRepository.findBookById(bk.getId());
-//        if (b != null)
-//            bookRepository.updateBook(bk);
-//        else
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book Not Found");
-//        model.addAttribute("books", bookRepository.findAll());
+        Book book = bookRepository.findBookById(bk.getId());
+        if (book != null)
+            bookRepository.save(bk);
+        else
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book Not Found");
+
         return "index";
     }
 
     @DeleteMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") final Long id, Model model) {
-//        Book book = bookRepository.findBookById(id);  //.orElseThrow(()-> new IllegalArgumentException("invalid book id: " + id));
-//        bookRepository.delete(book);
-//        model.addAttribute("book", bookRepository.findAll());
+        Book book = bookRepository.findBookById(id);  //.orElseThrow(()-> new IllegalArgumentException("invalid book id: " + id));
+        bookRepository.delete(book);
+        model.addAttribute("book", bookRepository.findAll());
         return "index";
     }
 }

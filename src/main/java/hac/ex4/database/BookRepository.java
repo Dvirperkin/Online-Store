@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    //List<Book> save(Book book);
-
-    void updateBook(Book book);
+    Book save(Book books);
 
     void delete(Book book);
 

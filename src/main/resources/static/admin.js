@@ -12,30 +12,19 @@
     function addBook(event) {
         event.preventDefault();
 
-        const c = {
-            id: document.getElementById("BookID").value,
-            name: document.getElementById("BookName").value,
-            image: "",
-            quantity: 0,
-            price: document.getElementById("Price").value,
-            discount: document.getElementById("Discount").value
-        };
-
-        console.log(c)
-
         fetch("/api/addBook", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: {
+            body: JSON.stringify({
                 id: document.getElementById("BookID").value,
                 name: document.getElementById("BookName").value,
                 image: "",
                 quantity: 0,
                 price: document.getElementById("Price").value,
                 discount: document.getElementById("Discount").value
-            }
+            })
         }).then(status)
             .then(json)
             .then(res => {

@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class Book implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty(message = "Name is mandatory")
@@ -24,7 +23,9 @@ public class Book implements Serializable {
     private Double price;
     private Double discount;
 
-    public Book(){}
+    public Book(){
+        System.out.println("Default");
+    }
 
     public Book(Long id ,String name, String image, Double price, Double discount){
         this.id = id;
@@ -38,6 +39,18 @@ public class Book implements Serializable {
 
     public Double getDiscount() {
         return discount;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", discount=" + discount +
+                '}';
     }
 
     public void setDiscount(Double discount) {
