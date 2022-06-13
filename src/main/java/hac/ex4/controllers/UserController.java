@@ -16,4 +16,9 @@ public class UserController {
     public String admin(){
         return "admin";
     }
+
+    @GetMapping("/cart")
+    public String cart(){
+        return "cart";
+    }
 }
