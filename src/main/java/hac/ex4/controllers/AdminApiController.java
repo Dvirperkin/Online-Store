@@ -5,51 +5,41 @@ import hac.ex4.database.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/api")
-public class RestAPIController {
+public class AdminApiController {
 
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping("/hi")
-    public String hi() {
-
-        System.out.println("hi");
-
-        return "show-books";
-    }
-
-    @PostMapping(value = "/addBook")
+    @PostMapping(value = "/add")
     public ResponseEntity addBook(@Valid @RequestBody Book book, BindingResult result) {
-
-        System.out.println("addBook");
         // Spring validation according to User @Entity definition
         if (result.hasErrors()) {
-            ResponseEntity.ok(HttpStatus.BAD_REQUEST); // you don’t necessarily need a full UI response
+            return new ResponseEntity(HttpStatus.BAD_REQUEST); // you don’t necessarily need a full UI response
             // if the error is not normal behavior
         }
+        book.setImage("bookImage.png");
         bookRepository.save(book);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PutMapping(value = "/update/{id}")
-    public String updateBook(@PathVariable("id") final Long id, @Valid Book bk, BindingResult result) {
+    public String updateBook(@PathVariable("id") final Long id, @Valid @RequestBody Book updatedBook, BindingResult result) {
         if (result.hasErrors()) {
-            bk.setId(id);
             return "update-book";
         }
 
-        Book book = bookRepository.findBookById(bk.getId());
+        Book book = bookRepository.findBookById(updatedBook.getId());
         if (book != null)
-            bookRepository.save(bk);
+            bookRepository.save(updatedBook);
         else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book Not Found");
 
@@ -57,10 +47,9 @@ public class RestAPIController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public String delete(@PathVariable("id") final Long id, Model model) {
+    public ResponseEntity delete(@PathVariable("id") final Long id) {
         Book book = bookRepository.findBookById(id);  //.orElseThrow(()-> new IllegalArgumentException("invalid book id: " + id));
         bookRepository.delete(book);
-        model.addAttribute("book", bookRepository.findAll());
-        return "index";
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
