@@ -1,13 +1,11 @@
 package hac.ex4.database;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
+@Table(name="BOOKS")
 public class Book implements Serializable {
 
     @Id
@@ -16,16 +14,14 @@ public class Book implements Serializable {
     @NotEmpty(message = "Name is mandatory")
     private String name;
 
-    private String image = "resources/bookImage.png";
+    private String image = "bookImage.png";
     private Integer quantity = 0;
 
     //@NotEmpty(message = "Price is mandatory")
     private Double price;
     private Double discount;
 
-    public Book(){
-        System.out.println("Default");
-    }
+    public Book(){}
 
     public Book(Long id ,String name, String image, Double price, Double discount){
         this.id = id;
@@ -39,18 +35,6 @@ public class Book implements Serializable {
 
     public Double getDiscount() {
         return discount;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", discount=" + discount +
-                '}';
     }
 
     public void setDiscount(Double discount) {
