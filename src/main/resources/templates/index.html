@@ -9,7 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="row">
+<div class="container">
+    <div class="row container-fluid">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Book Store</a>
@@ -38,24 +39,25 @@
             </div>
         </nav>
     </div>
-    <div>
+    <div class="row">
         <h1>Welcome To the book store!</h1>
         <a href="/admin">admin</a>
-        <div class="row">
-            <div class="col-12">
-                <h2>Top sales</h2>
-                <div id="TopSalesList">
+    </div>
 
-                </div>
-            </div>
-            <div class="col-12">
-                <h2>Top sales</h2>
-                <div id="Products">
-
-                </div>
-            </div>
+    <div class="row">
+        <h2>Top sales</h2>
+        <div id="TopSalesList" class="row">
+            Top Sales Products!
         </div>
     </div>
 
+    <div class="row">
+            <h2>Products</h2>
+            <div id="Products" class="row">
+                Our Products!
+            </div>
+    </div>
+
+</div>
 </body>
 </html>
