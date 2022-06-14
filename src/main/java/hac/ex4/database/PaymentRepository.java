@@ -7,6 +7,7 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     Payment save(Payment payment);
+    List<Payment> findAll();
 
     List<Payment> findAllByOrderByDatetime();
 }

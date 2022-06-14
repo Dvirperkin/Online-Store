@@ -7,6 +7,8 @@ import hac.ex4.database.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,8 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
-@RequestMapping("/admin/api")
+@Controller
+@RequestMapping("/admin")
 public class AdminApiController {
 
     @Autowired
@@ -25,40 +27,54 @@ public class AdminApiController {
     private PaymentRepository paymentRepository;
 
     @GetMapping(value = "/Payments")
-    public List<Payment> getPayments() {
-        return paymentRepository.findAllByOrderByDatetime();
+    public String getPayments(Model model) {
+        model.addAttribute("payments", paymentRepository.findAll());
+
+        return "admin";
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity addProduct(@Valid @RequestBody Product product, BindingResult result) {
+    public String addProduct(@Valid Product product, BindingResult result, Model model) {
         // Spring validation according to User @Entity definition
         if (result.hasErrors())
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return "404";
 
         product.setImage("ProductImage.png");
         productRepository.save(product);
-
-        return ResponseEntity.ok(HttpStatus.OK);
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("add" , "active");
+        model.addAttribute("update" , "");
+        model.addAttribute("delete" , "");
+        return "admin";
     }
 
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity updateProduct(@PathVariable("id") final Long id, @Valid @RequestBody Product updatedProduct, BindingResult result) {
+    @PostMapping(value = "/update")
+    public String updateProduct(@Valid Product product, BindingResult result, Model model) {
         if (result.hasErrors())
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return "404";
 
-        Product product = productRepository.findProductById(updatedProduct.getId());
+        Product updatedProduct = productRepository.findProductById(product.getId());
         if (product != null)
-            productRepository.save(updatedProduct);
+            productRepository.save(product);
         else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product Not Found");
-
-        return ResponseEntity.ok(HttpStatus.OK);
+        model.addAttribute("add" , "");
+        model.addAttribute("update" , "active");
+        model.addAttribute("delete" , "");
+        model.addAttribute("products", productRepository.findAll());
+        return "admin";
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") final Long id) {
+    @PostMapping(value = "/delete")
+    public String delete(@Valid final Long id,BindingResult result, Model model) {
+        if(result.hasErrors())
+            return "404";
         Product product = productRepository.findProductById(id);  //.orElseThrow(()-> new IllegalArgumentException("Invalid product id: " + id));
         productRepository.delete(product);
-        return ResponseEntity.ok(HttpStatus.OK);
+        model.addAttribute("add" , "");
+        model.addAttribute("update" , "");
+        model.addAttribute("delete" , "active");
+        model.addAttribute("products", productRepository.findAll());
+        return "admin";
     }
 }
