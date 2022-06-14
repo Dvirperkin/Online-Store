@@ -1,13 +1,66 @@
 ( function () {
 
     document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("AddBookForm").addEventListener("submit", addBook)
-        document.getElementById("UpdateBookForm").addEventListener("submit", updateBook)
-        document.getElementById("DeleteBookForm").addEventListener("submit", deleteBook)
-        document.getElementById("ToDeleteID").addEventListener("change", searchProductToDelete)
+        document.getElementById("v-pills-payments-tab").addEventListener("click", showPayments)
+        document.getElementById("v-pills-productManagement-tab").addEventListener("click", showProducts)
+        document.getElementById("AddProductForm").addEventListener("submit", addProduct)
+        document.getElementById("UpdateProductForm").addEventListener("submit", updateProduct)
+        document.getElementById("DeleteProductForm").addEventListener("submit", deleteProduct)
+        document.getElementById("ToDeleteID").addEventListener("input", searchProductToDelete)
     })
 
-    function addBook(event) {
+    function showPayments(event) {
+        fetch("/admin/api/Payments")
+            .then(status)
+            .then(json)
+            .then(res => {
+                let paymentsSum = 0
+                let payments = document.getElementById("Payments")
+                payments.innerHTML = ""
+
+                res.map(payment => {
+                    payments.innerHTML += `
+                    <tr>
+                        <td>${payment.id}</td>
+                        <td>Anonymous</td>
+                        <td>${payment.datetime}</td>
+                        <td>${payment.amount}</td>
+                    </tr>
+                    `
+                    paymentsSum += payment.amount
+                })
+
+                document.getElementById("PaymentsSum").innerText = paymentsSum
+            })
+            .catch(e => {
+                document.getElementById("Payments").innerHTML = ""
+                document.getElementById("PaymentsSum").innerText = '0'
+            })
+    }
+    function showProducts(event) {
+        fetch("/api/products")
+            .then(status)
+            .then(json)
+            .then(res => {
+                let products = document.getElementById("Products")
+                products.innerHTML = ""
+
+                res.map(product => {
+                    products.innerHTML += `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                        <td>${product.discount}</td>
+                    </tr>
+                    `
+                })
+            })
+            .catch(e => {
+                document.getElementById("Products").innerHTML = ""
+            })
+    }
+    function addProduct(event) {
         event.preventDefault();
 
         fetch("admin/api/add", {
@@ -16,8 +69,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id: document.getElementById("BookID").value,
-                name: document.getElementById("BookName").value,
+                name: document.getElementById("ProductName").value,
                 image: "",
                 quantity: 0,
                 price: document.getElementById("Price").value,
@@ -26,10 +78,11 @@
         }).then(status)
             .then(json)
             .then(res => {
-
+                showProducts()
+                document.getElementById("AddProductForm").reset()
             })
     }
-    function updateBook(event) {
+    function updateProduct(event) {
         event.preventDefault();
         fetch(`admin/api/update/${document.getElementById("ToUpdateID").value}`, {
             method: "PUT",
@@ -47,10 +100,11 @@
         }).then(status)
             .then(json)
             .then(res => {
-
+                showProducts()
+                document.getElementById("UpdateProductForm").reset()
             })
     }
-    function deleteBook(event) {
+    function deleteProduct(event) {
         event.preventDefault();
 
         fetch(`admin/api/delete/${document.getElementById("ToDeleteID").value}`, {
@@ -58,23 +112,24 @@
         }).then(status)
             .then(json)
             .then(res => {
-
+                showProducts()
+                document.getElementById("DeleteProductForm").reset()
             })
     }
-
     function searchProductToDelete(event) {
         let productsBoard = document.getElementById("ProductsBoard")
         productsBoard.innerHTML = ""
-        fetch("/api/books")
+        fetch(`/api/product/${event.target.value}`)
             .then(status)
             .then(json)
             .then(res => {
-                console.log(res)
+                addProductTo(res, productsBoard)
+            })
+            .catch(e => {
+                productsBoard.innerHTML = ""
             })
     }
-
-
-    function addItemsList(product, container) {
+    function addProductTo(product, container) {
         let id = product.id;
         let listItem = document.createElement('div')
         listItem.setAttribute("id", `${product.id}`)
@@ -94,11 +149,6 @@
         container.append(listItem)
     }
 
-
-
-
-
-
     //Checks response status code.
     function status(res) {
         if (res.status >= 200 && res.status <= 300) {
@@ -107,6 +157,7 @@
             return  Promise.reject(res.statusText);
         }
     }
+
     //Casting the promise to json.
     function json(res){
         return res.json();

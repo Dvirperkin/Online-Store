@@ -1,29 +1,39 @@
 package hac.ex4.database;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
-@Table(name="BOOKS")
-public class Book implements Serializable {
+public class Product implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty(message = "Name is mandatory")
     private String name;
 
-    private String image = "bookImage.png";
+    private String image = "productImage.png";
+
+    @DecimalMin("0")
     private Integer quantity = 0;
 
-    //@NotEmpty(message = "Price is mandatory")
+    @DecimalMin("1")
     private Double price;
+
+    @DecimalMin("0")
+    @DecimalMax("100")
     private Double discount;
 
-    public Book(){}
+    public Product(){}
 
-    public Book(Long id ,String name, String image, Double price, Double discount){
+    public Product(Long id , String name, String image, Double price, Double discount){
         this.id = id;
         this.name = name;
         if(image != null)
