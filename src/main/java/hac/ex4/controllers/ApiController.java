@@ -1,7 +1,7 @@
 package hac.ex4.controllers;
 
-import hac.ex4.database.Book;
-import hac.ex4.database.BookRepository;
+import hac.ex4.database.Product;
+import hac.ex4.database.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,18 +14,18 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
     @Autowired
-    private BookRepository bookRepository;
+    private ProductRepository productRepository;
 
     @GetMapping("/product/{id}")
-    public Book getBook(@PathVariable Long id){
-        return bookRepository.findBookById(id);
+    public Product getProduct(@PathVariable Long id){
+        return productRepository.findProductById(id);
     }
 
     @GetMapping("/products")
-    public List<Book> allBooks() {
-        return bookRepository.findAll();
+    public List<Product> allProduct() {
+        return productRepository.findAll();
     }
 
     @GetMapping("/top5products")
-    public List<Book> top5() { return bookRepository.findFirst5ByOrderByDiscountDesc(); }
+    public List<Product> top5() { return productRepository.findFirst5ByOrderByDiscountDesc(); }
 }
