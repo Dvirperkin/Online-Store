@@ -25,9 +25,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String admin(Model model){
-        model.addAttribute("add" , "");
-        model.addAttribute("update" , "");
-        model.addAttribute("delete" , "");
+        model.addAttribute("tabActive", "");
         model.addAttribute("product", new Product());
         model.addAttribute("payment", new Payment());
         model.addAttribute("payments", paymentRepository.findAll());

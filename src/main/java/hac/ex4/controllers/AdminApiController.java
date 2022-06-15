@@ -41,10 +41,8 @@ public class AdminApiController {
 
         product.setImage("ProductImage.png");
         productRepository.save(product);
+        model.addAttribute("tabActive", "add");
         model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("add" , "active");
-        model.addAttribute("update" , "");
-        model.addAttribute("delete" , "");
         return "admin";
     }
 
@@ -58,9 +56,7 @@ public class AdminApiController {
             productRepository.save(product);
         else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product Not Found");
-        model.addAttribute("add" , "");
-        model.addAttribute("update" , "active");
-        model.addAttribute("delete" , "");
+        model.addAttribute("tabActive", "update");
         model.addAttribute("products", productRepository.findAll());
         return "admin";
     }
@@ -71,9 +67,7 @@ public class AdminApiController {
             return "404";
         Product product = productRepository.findProductById(id);  //.orElseThrow(()-> new IllegalArgumentException("Invalid product id: " + id));
         productRepository.delete(product);
-        model.addAttribute("add" , "");
-        model.addAttribute("update" , "");
-        model.addAttribute("delete" , "active");
+        model.addAttribute("tabActive", "delete");
         model.addAttribute("products", productRepository.findAll());
         return "admin";
     }

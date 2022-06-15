@@ -38,7 +38,6 @@
                 </div>
             </div>
         </nav>
-
         <div class="row">
             <div class="col">
                 <a href="/logout"><button>Logout</button></a>
@@ -55,12 +54,12 @@
                     <div class="row">
                         <div class="col-4 d-flex align-items-start">
                             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <button class="nav-link" th:classappend="${add}" id="v-pills-addProduct-tab" data-bs-toggle="pill" data-bs-target="#v-pills-addProduct" type="button" role="tab" aria-controls="v-pills-addProduct" aria-selected="false"  >Add Product</button>
-                                <button class="nav-link" th:classappend=" ${update} "  id="v-pills-updateProduct-tab" data-bs-toggle="pill" data-bs-target="#v-pills-updateProduct" type="button" role="tab" aria-controls="v-pills-updateProduct" aria-selected="false">Update Product</button>
-                                <button class="nav-link" th:classappend="${delete}" id="v-pills-deleteProduct-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleteProduct" type="button" role="tab" aria-controls="v-pills-deleteProduct" aria-selected="false">Delete Product</button>
+                                <button class="nav-link" th:classappend="${tabActive == 'add'} ? 'active':''" id="v-pills-addProduct-tab" data-bs-toggle="pill" data-bs-target="#v-pills-addProduct" type="button" role="tab" aria-controls="v-pills-addProduct" aria-selected="false"  >Add Product</button>
+                                <button class="nav-link" th:classappend="${tabActive == 'update'} ? 'active':''"  id="v-pills-updateProduct-tab" data-bs-toggle="pill" data-bs-target="#v-pills-updateProduct" type="button" role="tab" aria-controls="v-pills-updateProduct" aria-selected="false">Update Product</button>
+                                <button class="nav-link" th:classappend="${tabActive == 'delete'} ? ' active':''" id="v-pills-deleteProduct-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleteProduct" type="button" role="tab" aria-controls="v-pills-deleteProduct" aria-selected="false">Delete Product</button>
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade" id="v-pills-addProduct" role="tabpanel" aria-labelledby="v-pills-addProduct-tab" tabindex="0">
+                                <div class="tab-pane fade" th:classappend="${tabActive == 'add'} ? 'show active':''" id="v-pills-addProduct" role="tabpanel" aria-labelledby="v-pills-addProduct-tab" tabindex="0">
                                     <div class="col">
                                         <form action="#" th:action="@{/admin/add}" th:object="${product}" id="AddProductForm" method="post">
                                             <div>
@@ -80,7 +79,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-updateProduct" role="tabpanel" aria-labelledby="v-pills-updateProduct-tab" tabindex="0">
+                                <div class="tab-pane fade" th:classappend="${tabActive == 'update'} ? 'show active':''" id="v-pills-updateProduct" role="tabpanel" aria-labelledby="v-pills-updateProduct-tab" tabindex="0">
                                     <div class="col">
                                         <form action="#" th:action="@{/admin/update}" th:object="${product}" id="UpdateProductForm" method="POST">
                                             <div>
@@ -104,7 +103,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-deleteProduct" role="tabpanel" aria-labelledby="v-pills-deleteProduct-tab" tabindex="0">
+                                <div class="tab-pane fade" th:classappend="${tabActive == 'delete'} ? 'show active':''" id="v-pills-deleteProduct" role="tabpanel" aria-labelledby="v-pills-deleteProduct-tab" tabindex="0">
                                     <div class="col">
                                         <form id="DeleteProductForm" method="post">
                                             <div>
