@@ -1,13 +1,4 @@
 ( function () {
-    fetch('/api/productcarts')
-        .then(status)
-        .then(json)
-        .then(res=>{
-            let item_list = document.getElementById("cartItems")
-            for(let product in res.product){
-                addItemsList(product, item_list)
-            }
-        })
 
     function addItemsList(product,item_list) {
         let id = product.id;
