@@ -50,10 +50,10 @@
             </div>
             <div class="col" id="cartItems">
                 <div th:each="product: ${products}">
-                    <h3 th:text="${product.getName()}"></h3> <br/>
-                    <img class="w-25" th:src="${product.getImage()}"> <br/>
-                    Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
-                    Quantity: <span th:text="${product.getQuantity()}"></span>
+                    <h3 th:text="${product.getValue().getName()}"></h3> <br/>
+                    <img class="w-25" th:src="${product.getValue().getImage()}"> <br/>
+                    Price: <span th:text="${product.getValue().getPrice()}"></span> Price After Discount <span th:text="${(product.getValue().getPrice() * (1 - ( product.getValue().getDiscount() / 100 )))}"></span> <br/>
+                    Quantity: <span th:text="${product.getValue().getQuantity()}"></span>
                 </div>
             </div>
         </div>

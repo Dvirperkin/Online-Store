@@ -21,8 +21,8 @@ public class Product implements Serializable {
 
     private String image = "productImage.png";
 
-    @DecimalMin("0")
-    private Integer quantity = 0;
+    @DecimalMin("1")
+    private Integer quantity = 1;
 
     @DecimalMin("1")
     private Double price;
@@ -40,7 +40,7 @@ public class Product implements Serializable {
             this.image = image;
         this.price = price;
         this.discount = discount;
-        this.quantity += 1;
+        this.quantity = 1;
     }
 
     public Double getDiscount() {

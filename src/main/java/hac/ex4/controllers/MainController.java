@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 @Controller
 public class MainController {
@@ -46,6 +47,7 @@ public class MainController {
     @GetMapping("/cart")
     public String cart(Long id, Model model){
 
+        model.addAttribute("products", new HashMap<Long, Product>());
         model.addAttribute("products", shoppingCart.getProducts());
 
         return "cart";
