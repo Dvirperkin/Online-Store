@@ -1,5 +1,6 @@
 package hac.ex4.controllers;
 
+import hac.ex4.beans.ShoppingCart;
 import hac.ex4.database.Payment;
 import hac.ex4.database.PaymentRepository;
 import hac.ex4.database.Product;
@@ -9,17 +10,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+import javax.annotation.Resource;
 
-public class UserController {
+@Controller
+public class MainController {
     @Autowired
     private ProductRepository productRepository;
 
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Resource(name = "getShoppingCart")
+    private ShoppingCart shoppingCart;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+
+        model.addAttribute("product", new Product());
+        model.addAttribute("top5products", productRepository.findFirst5ByOrderByDiscountDesc());
+        model.addAttribute("products", productRepository.findAll());
+
         return "index";
     }
 
@@ -36,7 +46,10 @@ public class UserController {
     }
 
     @GetMapping("/cart")
-    public String cart(){
+    public String cart(Long id, Model model){
+
+        model.addAttribute("products", shoppingCart.getProducts());
+
         return "cart";
     }
 }
