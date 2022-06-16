@@ -39,6 +39,11 @@ public class ProductService {
         return productRepository.findFirst5ByOrderByDiscountDesc();
     }
 
+    /**
+     * Execute a purchase to List of items.
+     * @param cartProducts - The list of items that the user wants to purchase.
+     * @param cartQuantities - The amount of every product.
+     */
     @Transactional
     public void executePurchase(HashMap<Long, Product> cartProducts, HashMap<Long, Integer> cartQuantities){
         cartProducts.forEach((id, product) -> {

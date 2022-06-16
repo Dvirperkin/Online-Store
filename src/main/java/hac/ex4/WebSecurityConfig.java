@@ -14,12 +14,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
+    /**
+     * Configure security of manager authentication.
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication() // we use a in-memory database (good for development)
                 .withUser("admin").password(encoder.encode("admin")).roles("ADMIN");
     }
 
+    /**
+     * Configure security of http.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

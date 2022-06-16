@@ -1,0 +1,27 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:fragment="popmessagefiles">
+    <meta charset="UTF-8">
+    <title>Pop Message</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div th:fragment="popmessage">
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img  class="rounded w-25 me-2" alt="..." id="pop-image">
+                    <strong class="me-auto">Book Store</strong>
+                    <small>Cart message</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastBody">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

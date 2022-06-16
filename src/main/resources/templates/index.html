@@ -87,6 +87,7 @@
                         <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'), 'quantityProductSpan');">Add to Cart</button>
                     </div>
                 </div>
+                <div th:insert="fragments/popmessage.html" :: body></div>
             </div>
         </div>
     </div>

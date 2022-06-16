@@ -13,7 +13,7 @@ public class SessionListenerCounter implements HttpSessionListener {
     private final AtomicInteger activeSessions;
 
     /**
-     * The class constructor.
+     * Constructor.
      */
     public SessionListenerCounter() {
         super();
@@ -21,7 +21,7 @@ public class SessionListenerCounter implements HttpSessionListener {
     }
 
     /**
-     *
+     * Gets all the active sessions
      * @return
      */
     public int getTotalActiveSession() {
@@ -29,9 +29,9 @@ public class SessionListenerCounter implements HttpSessionListener {
     }
 
     /**
-     * The function increases the number of sessions by 1 and prints the current number of sessions.
-     * It receives a HttpSessionEvent which announces that a new session has been created.
-     * @param event The HttpSessionEvent which announces that a new session has been created.
+     * Increase the session number and shows how many sessions created,
+     * The HttpSession tells that new session has been created.
+     * @param event - The HttpSessionEvent that tell that a new session has been created.
      */
     public void sessionCreated(final HttpSessionEvent event) {
         activeSessions.incrementAndGet();
@@ -39,8 +39,8 @@ public class SessionListenerCounter implements HttpSessionListener {
     }
 
     /**
-     * The function decreases the number of sessions by 1 and prints the current number of sessions.
-     * It receives a HttpSessionEvent which announces that a new session has been destroyed.
+     * Decrease the session number and shows how many sessions created,
+     * The HttpSession tells that new session has been destroyed.
      * @param event The HttpSessionEvent which announces that a new session has been destroyed.
      */
     public void sessionDestroyed(final HttpSessionEvent event) {

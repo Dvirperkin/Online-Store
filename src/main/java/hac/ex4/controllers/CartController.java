@@ -27,6 +27,12 @@ public class CartController {
     @Resource(name = "getShoppingCart")
     private ShoppingCart shoppingCart;
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/cart")
     public String cart(Long id, Model model){
 
@@ -35,6 +41,7 @@ public class CartController {
         model.addAttribute("products", new HashMap<Long, Product>());
         model.addAttribute("quantities", shoppingCart.getQuantities());
         model.addAttribute("products", shoppingCart.getProducts());
+        model.addAttribute("cartQuantity", shoppingCart.getCartSize());
 
         return "cart";
     }
@@ -56,6 +63,7 @@ public class CartController {
                 shoppingCart.clear();
             }
         } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
             System.out.println(e);
         } finally {
             model.addAttribute("total", shoppingCart.getTotalPrice());
@@ -63,7 +71,7 @@ public class CartController {
             model.addAttribute("products", new HashMap<Long, Product>());
             model.addAttribute("products", shoppingCart.getProducts());
         }
-
+        model.addAttribute("cartQuantity", shoppingCart.getCartSize());
         return "cart";
     }
 
@@ -71,8 +79,11 @@ public class CartController {
     public String clearCart(Model model){
         shoppingCart.clear();
         model.addAttribute("total", shoppingCart.getTotalPrice());
+        model.addAttribute("quantities", shoppingCart.getQuantities());
         model.addAttribute("products", new HashMap<Long, Product>());
         model.addAttribute("products", shoppingCart.getProducts());
+
+        model.addAttribute("cartQuantity", shoppingCart.getCartSize());
         return "cart";
     }
 
@@ -83,7 +94,8 @@ public class CartController {
         model.addAttribute("total", shoppingCart.getTotalPrice());
         model.addAttribute("products", new HashMap<Long, Product>());
         model.addAttribute("products", shoppingCart.getProducts());
-
+        model.addAttribute("quantities", shoppingCart.getQuantities());
+        model.addAttribute("cartQuantity", shoppingCart.getCartSize());
         return "cart";
     }
 }

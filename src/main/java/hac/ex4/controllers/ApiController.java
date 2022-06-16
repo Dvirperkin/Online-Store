@@ -36,15 +36,17 @@ public class ApiController {
      */
     @GetMapping("/addToCart/{id}/{quantity}")
     public ResponseEntity addToCart(@PathVariable Long id, @PathVariable Integer quantity, Model model){
-
         if(quantity > 0){
             Product product = productRepository.findProductById(id);
+            if(product.getStock() < 1){
+                return new ResponseEntity<>(shoppingCart.getCartSize() ,HttpStatus.BAD_REQUEST);
+            }
             shoppingCart.add(product, quantity);
             model.addAttribute("message" , "Successfully Added!");
             model.addAttribute("addedState", "text-bg-success");
         }
 
-        return ResponseEntity.ok(HttpStatus.OK);
+        return new ResponseEntity<>(shoppingCart.getCartSize() ,HttpStatus.OK);
     }
     /**
      * Add items to the cart
@@ -53,8 +55,7 @@ public class ApiController {
      * @return List<Product> - The list of all products with the search name.
      */
     @GetMapping("/findProducts/{name}")
-    public List<Product> findProducts(@PathVariable String name, Model model){
-        List<Product> products = productRepository.findFirst5ByNameContainsOrderByName(name);
-        return products;
+    public ResponseEntity findProducts(@PathVariable String name, Model model){
+        return new ResponseEntity<>(productRepository.findFirst5ByNameContainsOrderByName(name) ,HttpStatus.OK);
     }
 }

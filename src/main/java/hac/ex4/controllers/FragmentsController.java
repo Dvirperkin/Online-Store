@@ -10,8 +10,11 @@ public class FragmentsController {
         return "fragments/navigator";
     }
     @GetMapping("fragments/searchbar")
-
     public String getSearchbar(){
         return "fragments/searchbar";
+    }
+    @GetMapping("fragments/popmessage")
+    public String getPopMessage(){
+        return "fragments/popmessage";
     }
 }

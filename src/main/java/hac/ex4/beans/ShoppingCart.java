@@ -23,6 +23,7 @@ public class ShoppingCart implements Serializable {
         this.quantities = new HashMap<>();
     }
 
+
     public HashMap<Long, Product> getProducts() {
         return products;
     }
@@ -32,7 +33,7 @@ public class ShoppingCart implements Serializable {
     public double getTotalPrice() {
         return totalPrice;
     }
-
+    public int getCartSize(){return products.size();}
     public void setProducts(HashMap<Long, Product> products) {
         this.products = products;
     }
@@ -43,6 +44,11 @@ public class ShoppingCart implements Serializable {
         this.totalPrice = totalPrice;
     }
 
+    /**
+     * Adds product to shopping cart.
+     * @param product - The product to add.
+     * @param quantity - The quantity of this product that we want to add.
+     */
     public void add(Product product, Integer quantity) {
 
         totalPrice += (product.getPrice() * (1 - product.getDiscount() / 100)) * quantity;
@@ -55,17 +61,30 @@ public class ShoppingCart implements Serializable {
         quantities.put(product.getId(), quantity);
         products.put(product.getId(), product);
     }
+
+    /**
+     * Delete product from the cart
+     * @param id - The id of the product.
+     */
     public void delete(Long id) {
         totalPrice -= products.get(id).getPrice() * (1 - products.get(id).getDiscount() / 100);
         products.remove(id);
         quantities.remove(id);
     }
+
+    /**
+     * Clears the shopping cart.
+     */
     public void clear() {
         totalPrice = 0;
         products.clear();
         quantities.clear();
     }
 
+    /**
+     *
+     * @return
+     */
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public ShoppingCart getShoppingCart() {

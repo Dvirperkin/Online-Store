@@ -69,7 +69,7 @@ public class Product implements Serializable {
     }
     public void setStock(Integer stock) {
         if(stock < 0){
-            throw new IllegalArgumentException("The requested product is out of stock.");
+            throw new IllegalArgumentException("The requested product by the name: " + name + " with the id: " + id + " is out of stock.");
         }
         this.stock = stock;
     }
