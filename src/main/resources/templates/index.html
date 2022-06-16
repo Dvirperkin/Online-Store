@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid bg">
        <div class="row">
            <div class="col">
                <nav class="navbar navbar-expand-lg bg-light">
@@ -41,40 +41,68 @@
                </nav>
            </div>
        </div>
-       <div class="row">
-           <div class="col text-center">
-               <h1>Welcome To the book store!</h1>
+
+       <div class="row bg-secondary">
+           <div class="col text-center text-white">
+               <h1>Welcome To the online store!</h1>
            </div>
        </div>
-       <div class="row">
-           <div class="col">
+
+       <div class="row bg-info">
+           <div class="col text-center">
                <h2>Top sales</h2>
            </div>
        </div>
 
-       <div id="TopSalesList" class="row">
-           <div class="col-3" th:each="product: ${top5products}">
-               <h3 th:text="${product.getName()}"></h3> <br/>
-               <img class="w-25" th:src="${product.getImage()}"> <br/>
-               Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span><br/>
-               Quantity: <span th:text="${product.getQuantity()}"></span>
-               <button>Add to Cart</button>
+       <div id="TopSalesList" class="row text-center">
+           <div class="col-2 bg-light rounded" th:each="product: ${top5products}">
+               <div class="row m-0">
+                   <div class="col">
+                       <h3 th:text="${product.getName()}"></h3>
+                   </div>
+               </div>
+               <div class="row m-0">
+                   <div class="col">
+                       <img class="w-75 h-75" th:src="${product.getImage()}">
+                   </div>
+               </div>
+               <div class="row m-0">
+                   <div class="col">
+                       Price: <span th:text="${product.getPrice()}"></span> <br/>
+                       Discount: <span th:text="${product.getDiscount()}"></span> <br/>
+                       Final Price <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
+                       <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+                   </div>
+               </div>
            </div>
        </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col text-center bg-info">
                 <h2>Products</h2>
             </div>
         </div>
 
-        <div id="Products" class="row">
-            <div class="col-3" th:each="product: ${products}">
-                <h3 th:text="${product.getName()}"></h3> <br/>
-                <img class="w-25" th:src="${product.getImage()}"> <br/>
-                Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
-                Quantity: <span th:text="${product.getQuantity()}"></span> <br/>
-                <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+        <div id="Products" class="row text-center">
+            <div class="col-2 bg-light rounded" th:each="product: ${products}">
+                <div class="row m-0">
+                    <div class="col">
+                        <h3 th:text="${product.getName()}"></h3>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col">
+                        <img class="w-75 h-75" th:src="${product.getImage()}">
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col">
+                        Price: <span th:text="${product.getPrice()}"></span> <br/>
+                        Discount: <span th:text="${product.getDiscount()}"></span> <br/>
+                        Final Price <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
+                        <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

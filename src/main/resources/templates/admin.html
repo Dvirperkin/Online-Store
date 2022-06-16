@@ -41,7 +41,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col">
                 <a href="/logout"><button>Logout</button></a>
@@ -68,15 +67,19 @@
                                         <form action="#" th:action="@{/admin/add}" th:object="${product}" id="AddProductForm" method="post">
                                             <div>
                                                 <label for="ProductName" class="form-label">Product Name</label>
-                                                <input type="text" id="ProductName" class="form-control" th:field="*{name}"/>
+                                                <input type="text" id="ProductName" class="form-control" th:field="*{name}" th:onchange="" required/>
                                             </div>
                                             <div>
                                                 <label for="Price" class="form-label">Price</label>
-                                                <input type="number" id="Price" class="form-control" th:field="*{price}"/>
+                                                <input type="number" id="Price" class="form-control" th:field="*{price}" required/>
                                             </div>
                                             <div>
                                                 <label for="Discount" class="form-label">Discount</label>
-                                                <input type="number" id="Discount" class="form-control" th:field="*{discount}" />
+                                                <input type="number" id="Discount" class="form-control" th:field="*{discount}" required/>
+                                            </div>
+                                            <div>
+                                                <label for="Stock" class="form-label">Stock</label>
+                                                <input type="number" id="Stock" class="form-control" th:field="*{stock}" required/>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Add</button>
                                             <button type="reset" class="btn btn-danger">Clear</button>
@@ -102,6 +105,10 @@
                                                 <label for="ToUpdateDiscount" class="form-label">Discount</label>
                                                 <input type="number" id="ToUpdateDiscount" class="form-control" th:field="*{discount}"/>
                                             </div>
+                                            <div>
+                                                <label for="ToUpdateStock" class="form-label">Stock</label>
+                                                <input type="number" id="ToUpdateStock" class="form-control" th:field="*{stock}" />
+                                            </div>
                                             <button type="submit" class="btn btn-primary">Update</button>
                                             <button type="reset" class="btn btn-danger">Clear</button>
                                         </form>
@@ -112,7 +119,7 @@
                                         <form action="#" th:action="@{/admin/delete}" id="DeleteProductForm" method="post">
                                             <div>
                                                 <label for="ToDeleteID" class="form-label">Product ID</label>
-                                                <input type="text" id="ToDeleteID" class="form-control" name="id" value=""/>
+                                                <input type="number" id="ToDeleteID" class="form-control" name="id" value=""/>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Delete</button>
                                             <button type="reset" class="btn btn-danger">Clear</button>

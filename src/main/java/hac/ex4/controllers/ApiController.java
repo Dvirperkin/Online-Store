@@ -27,17 +27,4 @@ public class ApiController {
         shoppingCart.add(product);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-//    @GetMapping("/product/{id}")
-//    public Product getProduct(@PathVariable Long id){
-//        return productRepository.findProductById(id);
-//    }
-//
-//    @GetMapping("/products")
-//    public List<Product> allProduct() {
-//        return productRepository.findAll();
-//    }
-//
-//    @GetMapping("/top5products")
-//    public List<Product> top5() { return productRepository.findFirst5ByOrderByDiscountDesc(); }
 }
