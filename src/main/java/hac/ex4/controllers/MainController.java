@@ -114,7 +114,7 @@ public class MainController {
     }
     @GetMapping("/product/{id}")
     public String product(@PathVariable Long id, Model model){
-        Product product = productRepository.getById(id);
+        Product product = productRepository.findProductById(id);
         model.addAttribute("product", product);
         return "product";
     }

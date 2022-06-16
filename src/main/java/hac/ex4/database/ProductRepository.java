@@ -15,7 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     void delete(Product product);
 
     List<Product> findAll();
-
     Product findProductById(Long id);
     List<Product> findFirst5ByNameContainsOrderByName(String name);
     List<Product> findAllByNameContainsOrderByName(String name);

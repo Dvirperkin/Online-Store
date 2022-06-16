@@ -1,21 +1,6 @@
 function addToCart(productId) {
     console.log(productId)
 
-    // fetch("api/addToCart",
-    //     {
-    //         method: "GET",
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({id: productId})
-    //     } )
-    //     .then(status)
-    //     .then(json)
-    //     .then(res => {
-    //
-    //     })
-    //     .catch()
-
     fetch(`api/addToCart/${productId}`)
         .then(status)
         .then(json)

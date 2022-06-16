@@ -11,10 +11,10 @@
 </head>
 <body>
     <div class="container">
+        <div th:insert="fragments/navigator.html" :: body></div>
+        <div th:insert="fragments/searchbar.html" :: body></div>
         <h1 th:text="${product.name}"></h1>
-        <img class="w-25" th:src="${product.getImage()}"> <br/>
         Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.getPrice() * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
-        Quantity: <span th:text="${product.getQuantity()}"></span>
         <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
     </div>
 </body>

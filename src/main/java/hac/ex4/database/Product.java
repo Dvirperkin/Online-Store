@@ -17,7 +17,7 @@ public class Product implements Serializable {
     @NotEmpty(message = "Name is mandatory")
     private String name;
 
-    private String image = "productImage.png";
+    private String image = "ProductImage.png";
 
     @Min(0)
     private Integer stock = 1;

@@ -12,35 +12,8 @@
 </head>
 <body>
     <div class="container-fluid bg-light">
-        <div class="row">
-            <div class="col">
-                <nav class="navbar navbar-expand-lg bg-light">
-                    <a class="navbar-brand" href="#">Book Store</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/cart">Cart</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/history">History</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin">Admin</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
+        <div th:insert="fragments/navigator.html" :: body></div>
+        <div th:insert="fragments/searchbar.html" :: body></div>
 
         <div class="row">
             <div class="col">
