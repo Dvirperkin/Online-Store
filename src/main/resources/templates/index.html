@@ -44,7 +44,7 @@
                    <div class="col">
                        Price: <span th:text="${product.getPrice()}"></span> <br/>
                        Discount: <span th:text="${product.getDiscount()}"></span> <br/>
-                       Final Price <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
+                       Final Price <span th:text="${#numbers.formatDecimal((product.price * (1 - ( product.getDiscount() / 100 ))),0,'COMMA',2 , 'POINT')}"></span> <br/>
 
                        <button class="btn rounded" th:data-thing="quantity5ProductSpan + ${product.getId()}" onclick="incQuantities(this.getAttribute('data-thing'));">+</button>
                        <span th:id="quantity5ProductSpan + ${product.getId()}">0</span>
