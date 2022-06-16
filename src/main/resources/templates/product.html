@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="/index.js"></script>
+    <meta charset="UTF-8">
+    <title th:text="${product}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${product.name}"></h1>
+        <img class="w-25" th:src="${product.getImage()}"> <br/>
+        Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.getPrice() * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
+        Quantity: <span th:text="${product.getQuantity()}"></span>
+        <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+    </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -14,13 +14,13 @@
     <div class="container-fluid">
        <div class="row">
            <div class="col">
-               <nav class="navbar navbar-expand-lg bg-light">
-                   <a class="navbar-brand" href="#">Book Store</a>
+               <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                   <a class="navbar-brand" href="/">Book Store</a>
                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                        <span class="navbar-toggler-icon"></span>
                    </button>
                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                       <ul class="navbar-nav">
+                       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                            <li class="nav-item">
                                <a class="nav-link active" aria-current="page" href="/">Home</a>
                            </li>
@@ -30,22 +30,42 @@
                            <li class="nav-item">
                                <a class="nav-link" href="/history">History</a>
                            </li>
-                           <li class="nav-item">
-                               <a class="nav-link" href="/admin">Admin</a>
-                           </li>
-                           <li class="nav-item">
-                               <a class="nav-link" href="#">Login</a>
-                           </li>
                        </ul>
+
+                       <div class="nav-item d-flex me-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                           <a class="nav-link" href="/admin">Admin</a>
+                       </div>
+                       <div class="nav-item d-flex me-2 " sec:authorize="isAuthenticated()">
+                           <a class="nav-link" href="/logout">Logout</a>
+                       </div>
+                       <div class="nav-item d-flex me-2" sec:authorize="!isAuthenticated()">
+                           <a class="nav-link" href="/login">Login</a>
+                       </div>
+
+
                    </div>
                </nav>
+
            </div>
        </div>
+        <div class="row">
+            <div class="col-4 nav-item justify-content-center p-2">
+                <form class="form-inline md-form" action="#" th:action="@{/searchProducts}">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" name="name" aria-label="Search" id="search-input">
+                    <div class="md-form d-flex align-items-stretch" id="searchDropDown" searchable="Search for Products">
+                        <option value="" disabled selected>Choose Product</option>
+                    </div>
+                    <button class="btn bg-primary btn-rounded btn-sm my-0" type="submit" id="search-button">Search</button>
+                </form>
+            </div>
+        </div>
        <div class="row">
            <div class="col text-center">
                <h1>Welcome To the book store!</h1>
+               <p th:text="${message}" th:classappend="${addedState}"></p>
            </div>
        </div>
+
        <div class="row">
            <div class="col">
                <h2>Top sales</h2>
