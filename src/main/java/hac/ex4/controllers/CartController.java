@@ -77,7 +77,7 @@ public class CartController {
             model.addAttribute("products", shoppingCart.getProducts());
         }
         model.addAttribute("cartQuantity", shoppingCart.getCartSize());
-        return "redirect:/cart";
+        return "cart";
     }
 
     /**
