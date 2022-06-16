@@ -50,7 +50,7 @@
                        <span th:id="quantity5ProductSpan + ${product.getId()}">0</span>
                        <button class="btn rounded" th:data-thing="quantity5ProductSpan + ${product.getId()}" onclick="decQuantities(this.getAttribute('data-thing'));">-</button> <br/>
 
-                       <button th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+                       <button th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'), 'quantity5ProductSpan');">Add to Cart</button>
                    </div>
                </div>
            </div>
@@ -84,7 +84,7 @@
                         <span th:id="quantityProductSpan + ${product.getId()}">0</span>
                         <button class="btn rounded" th:data-thing="quantityProductSpan + ${product.getId()}" onclick="decQuantities(this.getAttribute('data-thing'));">-</button> <br/>
 
-                        <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+                        <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'), 'quantityProductSpan');">Add to Cart</button>
                     </div>
                 </div>
             </div>

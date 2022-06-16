@@ -1,6 +1,6 @@
-function addToCart(productId) {
+function addToCart(productId, spanId) {
 
-    fetch(`api/addToCart/${productId}/${document.getElementById("quantityProductSpan" + productId).innerText}`)
+    fetch(`api/addToCart/${productId}/${document.getElementById(spanId + productId).innerText}`)
         .then(status)
         .then(json)
         .then(res => {

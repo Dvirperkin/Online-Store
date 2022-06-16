@@ -42,6 +42,11 @@ public class AdminController {
         return "admin";
     }
 
+    @GetMapping(value = "/add")
+    public String getAddProduct(){
+        return "404";
+    }
+
     @PostMapping(value = "/add")
     public String addProduct(@Valid Product product, BindingResult result, Model model) {
         if (!result.hasErrors()) {
@@ -55,6 +60,10 @@ public class AdminController {
         return "admin";
     }
 
+    @GetMapping(value = "/update")
+    public String getUpdateProduct(){
+        return "404";
+    }
     @PostMapping(value = "/update")
     public String updateProduct(@Valid Product product, BindingResult result, Model model) {
         if (!result.hasErrors()){
