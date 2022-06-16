@@ -27,5 +27,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE Product u SET u.stock = u.stock-:reduce WHERE u.id = :id")
     void purchaseProduct(@Param("id") Long id, @Param("reduce") Integer reduce);
-
 }

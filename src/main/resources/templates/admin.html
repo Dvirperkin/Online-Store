@@ -64,22 +64,30 @@
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade" th:classappend="${tabActive == 'add'} ? 'show active':''" id="v-pills-addProduct" role="tabpanel" aria-labelledby="v-pills-addProduct-tab" tabindex="0">
                                     <div class="col">
-                                        <form action="#" th:action="@{/admin/add}" th:object="${product}" id="AddProductForm" method="post">
+                                        <form action="#" th:action="@{/admin/add}" th:object="${product}" id="AddProductForm" autocomplete="off" method="post">
                                             <div>
                                                 <label for="ProductName" class="form-label">Product Name</label>
                                                 <input type="text" id="ProductName" class="form-control" th:field="*{name}" th:onchange="" required/>
+                                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                                            </div>
+                                            <div>
+                                                <label for="ProductImage" class="form-label" >Product Image</label>
+                                                <input type="text" id="ProductImage" class="form-control" th:field="*{image}"/>
                                             </div>
                                             <div>
                                                 <label for="Price" class="form-label">Price</label>
                                                 <input type="number" id="Price" class="form-control" th:field="*{price}" required/>
+                                                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="Discount" class="form-label">Discount</label>
                                                 <input type="number" id="Discount" class="form-control" th:field="*{discount}" required/>
+                                                <span th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="Stock" class="form-label">Stock</label>
                                                 <input type="number" id="Stock" class="form-control" th:field="*{stock}" required/>
+                                                <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="text-danger"></span>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Add</button>
                                             <button type="reset" class="btn btn-danger">Clear</button>
@@ -91,23 +99,32 @@
                                         <form action="#" th:action="@{/admin/update}" th:object="${product}" id="UpdateProductForm" method="POST">
                                             <div>
                                                 <label for="ToUpdateID" class="form-label" >Product ID</label>
-                                                <input type="text" id="ToUpdateID" class="form-control" th:field="*{id}" />
+                                                <input type="text" id="ToUpdateID" class="form-control" th:field="*{id}" required/>
+                                                <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="ToUpdateName" class="form-label" >Product Name</label>
-                                                <input type="text" id="ToUpdateName" class="form-control" th:field="*{name}"/>
+                                                <input type="text" id="ToUpdateName" class="form-control" th:field="*{name}" />
+                                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
                                             </div>
                                             <div>
-                                                <label for="ToUpdatePrice" class="form-label" >Price</label>
-                                                <input type="number" id="ToUpdatePrice" class="form-control" th:field="*{price}"/>
+                                                <label for="ToUpdateImage" class="form-label" >Product Image</label>
+                                                <input type="text" id="ToUpdateImage" class="form-control" th:field="*{image}" required/>
+                                            </div>
+                                            <div>
+                                                <label for="ToUpdatePrice" class="form-label">Price</label>
+                                                <input type="number" id="ToUpdatePrice" class="form-control" th:field="*{price}" required/>
+                                                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="ToUpdateDiscount" class="form-label">Discount</label>
-                                                <input type="number" id="ToUpdateDiscount" class="form-control" th:field="*{discount}"/>
+                                                <input type="number" id="ToUpdateDiscount" class="form-control" th:field="*{discount}" required/>
+                                                <span th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="ToUpdateStock" class="form-label">Stock</label>
-                                                <input type="number" id="ToUpdateStock" class="form-control" th:field="*{stock}" />
+                                                <input type="number" id="ToUpdateStock" class="form-control" th:field="*{stock}" required/>
+                                                <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="text-danger"></span>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Update</button>
                                             <button type="reset" class="btn btn-danger">Clear</button>
@@ -119,7 +136,7 @@
                                         <form action="#" th:action="@{/admin/delete}" id="DeleteProductForm" method="post">
                                             <div>
                                                 <label for="ToDeleteID" class="form-label">Product ID</label>
-                                                <input type="number" id="ToDeleteID" class="form-control" name="id" value=""/>
+                                                <input type="number" id="ToDeleteID" class="form-control" name="id" value="" required/>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Delete</button>
                                             <button type="reset" class="btn btn-danger">Clear</button>

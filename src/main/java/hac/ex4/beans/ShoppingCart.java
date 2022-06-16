@@ -43,16 +43,16 @@ public class ShoppingCart implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public void add(Product product) {
+    public void add(Product product, Integer quantity) {
 
-        totalPrice += product.getPrice() * (1 - product.getDiscount() / 100);
+        totalPrice += (product.getPrice() * (1 - product.getDiscount() / 100)) * quantity;
 
         if(products.containsKey(product.getId())){
-            quantities.replace(product.getId(), quantities.get(product.getId()) + 1);
+            quantities.replace(product.getId(), quantities.get(product.getId()) + quantity);
             return;
         }
 
-        quantities.put(product.getId(), 1);
+        quantities.put(product.getId(), quantity);
         products.put(product.getId(), product);
     }
     public void delete(Long id) {

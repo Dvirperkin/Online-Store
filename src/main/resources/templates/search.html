@@ -42,6 +42,7 @@
             </nav>
             </div>
         </div>
+
         <div class="row">
             <div class="col-4 nav-item justify-content-center p-2">
                 <form class="form-inline md-form" action="#" th:action="@{/searchProducts}">
@@ -53,6 +54,7 @@
                 </form>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
                 <h1 th:text="${message}"></h1>
@@ -62,10 +64,8 @@
                     <h2 th:text="${product.getName()}"></h2> <br/>
                     <img class="w-25" th:src="${product.getImage()}"> <br/>
                     Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span><br/>
-                    Quantity: <span th:text="${product.getQuantity()}"></span> <br/>
                     <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
                 </div>
-
             </div>
         </div>
     </div>
