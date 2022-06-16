@@ -16,6 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 
+/**
+ * ApiController
+ */
 public class ApiController {
 
     @Autowired
@@ -31,7 +34,8 @@ public class ApiController {
     /**
      * Add items to the cart
      * @param id - The id of the item
-     * @param model
+     * @param model - model
+     * @param quantity - quantity
      * @return ResponseEntity which contains the answer of the response.
      */
     @GetMapping("/addToCart/{id}/{quantity}")
@@ -51,8 +55,8 @@ public class ApiController {
     /**
      * Add items to the cart
      * @param name -The name of the item
-     * @param model
-     * @return List<Product> - The list of all products with the search name.
+     * @param model - model
+     * @return ResponseEntity - The list of all products with the search name.
      */
     @GetMapping("/findProducts/{name}")
     public ResponseEntity findProducts(@PathVariable String name, Model model){

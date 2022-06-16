@@ -17,6 +17,10 @@ public class ShoppingCart implements Serializable {
     private HashMap<Long, Product> products;
     private double totalPrice;
 
+
+    /**
+     *
+     */
     public ShoppingCart(){
         this.totalPrice = 0;
         this.products = new HashMap<>();
@@ -24,22 +28,56 @@ public class ShoppingCart implements Serializable {
     }
 
 
+    /**
+     *
+     * @return products
+     */
     public HashMap<Long, Product> getProducts() {
         return products;
     }
+
+    /**
+     *
+     * @return quantities
+     */
     public HashMap<Long, Integer> getQuantities() {
         return quantities;
     }
+
+    /**
+     *
+     * @return totalPrice
+     */
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    /**
+     *
+     * @return  products size
+     */
     public int getCartSize(){return products.size();}
+
+    /**
+     *
+     * @param products - Products list
+     */
     public void setProducts(HashMap<Long, Product> products) {
         this.products = products;
     }
+
+    /**
+     *
+     * @param quantities - Amount of each product
+     */
     public void setQuantities(HashMap<Long, Integer> quantities) {
         this.quantities = quantities;
     }
+
+    /**
+     *
+     * @param totalPrice - Price
+     */
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
@@ -83,7 +121,7 @@ public class ShoppingCart implements Serializable {
 
     /**
      *
-     * @return
+     * @return The cart
      */
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)

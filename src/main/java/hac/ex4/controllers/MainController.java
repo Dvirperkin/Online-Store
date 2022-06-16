@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MainController {
 
     /**
      * Gets the main page.
-     * @param model
+     * @param model - model
      * @return index - Home page of the site.
      */
     @GetMapping("/")
@@ -45,13 +46,21 @@ public class MainController {
     }
 
     /**
+     *
+     * @return - 404
+     */
+    @GetMapping("/product")
+    public String getProduct(){
+        return "404";
+    }
+    /**
      * Opens product page with the chosen id.
      * @param id - The id of the chosen product .
      * @param model
      * @return product - The Product page.
      */
-    @GetMapping("/product/{id}")
-    public String product(@PathVariable Long id, Model model){
+    @PostMapping("/product")
+    public String product(Long id, Model model){
         Product product = productService.findProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("cartQuantity", shoppingCart.getCartSize());
@@ -60,7 +69,7 @@ public class MainController {
 
     /**
      * Opens the admin page, the page is protected by spring security authentications.
-     * @param model
+     * @param model - model
      * @return admin - The admin page.
      */
     @GetMapping("/admin")
@@ -78,7 +87,7 @@ public class MainController {
     /**
      * The results of user search.
      * @param name - A sub string that name can contain.
-     * @param model
+     * @param model -model
      * @return search - The result page.
      */
     @GetMapping("/searchProducts")

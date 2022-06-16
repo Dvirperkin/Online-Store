@@ -83,10 +83,14 @@ function json(res){
                 res.forEach((product)=>{
                     let option = document.createElement("div");
                     option.innerHTML = `<div>
-                                                <a class="text-black text-decoration-none"  href="/product/${product.id}">
+                                        <form action="/product" method="POST">
+                                            <input type="hidden" th:field="*{id}" value="${product.id}" name="id"/>
+                                                <button class="text-black text-decoration-none"  type="submit"">
                                                     <img class="w-25" src="${product.image}"/>
                                                     ${product.name}
-                                                </a>
+                                                </button>
+                                           </form>
+
                                              </div>`;
                     select.appendChild(option);
                 })

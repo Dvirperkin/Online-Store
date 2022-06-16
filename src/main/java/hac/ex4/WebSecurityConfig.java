@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Configure security of manager authentication.
      * @param auth
-     * @throws Exception
+     * @throws Exception - configure
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Configure security of http.
      * @param http
-     * @throws Exception
+     * @throws Exception - configure
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {

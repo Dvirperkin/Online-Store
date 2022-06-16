@@ -23,26 +23,50 @@ public class Payment implements Serializable {
     @CreationTimestamp
     private Date datetime;
 
+    /**
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @return amount
+     */
     public Double getAmount() {
         return amount;
     }
 
+    /**
+     *
+     * @return datetime
+     */
     public Date getDatetime() {
         return datetime;
     }
 
+    /**
+     *
+     * @param id - id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param amount -amount
+     */
     public void setAmount(Double amount) {
         this.amount = amount;
     }
 
+    /**
+     *
+     * @param datetime - datetime
+     */
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }

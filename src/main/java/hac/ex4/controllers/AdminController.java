@@ -16,27 +16,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+/**
+ * Admin class
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
+    /**
+     * productService
+     */
     @Autowired
     private ProductService productService;
 
+    /**
+     * paymentService
+     */
     @Autowired
     private PaymentService paymentService;
 
+    /**
+     * shoppingCart
+     */
     @Resource(name = "getShoppingCart")
     private ShoppingCart shoppingCart;
 
     /**
      * Gets The payments table.
-     * @param model
+     * @param model - model
      * @return admin - The admin html page.
      */
     @GetMapping(value = "/Payments")
     public String getPayments(Model model) {
-
         model.addAttribute("payments", paymentService.findAllByOrderByDatetime());
         model.addAttribute("cartQuantity", shoppingCart.getCartSize());
         return "admin";
@@ -54,8 +65,8 @@ public class AdminController {
     /**
      * Add product to the store.
      * @param product - The product we want to add.
-     * @param result
-     * @param model
+     * @param result - result
+     * @param model - model
      * @return admin - The admin html page.
      */
     @PostMapping(value = "/add")
@@ -84,8 +95,8 @@ public class AdminController {
     /**
      * Updates product that already inside the store.
      * @param product - The product we want to update.
-     * @param result
-     * @param model
+     * @param result - result
+     * @param model - model
      * @return admin - The admin html page.
      */
     @PostMapping(value = "/update")
@@ -113,7 +124,7 @@ public class AdminController {
     /**
      * Deletes item from the store
      * @param id - The product we want to delete.
-     * @param model
+     * @param model - model
      * @return admin - The admin html page.
      */
     @PostMapping(value = "/delete")

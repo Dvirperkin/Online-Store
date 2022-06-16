@@ -32,6 +32,14 @@ public class Product implements Serializable {
 
     public Product(){}
 
+    /**
+     *
+     * @param id -id
+     * @param name - name
+     * @param image - image string
+     * @param price - price
+     * @param discount - discount
+     */
     public Product(Long id , String name, String image, Double price, Double discount){
         this.id = id;
         this.name = name;
@@ -42,43 +50,101 @@ public class Product implements Serializable {
         this.stock = 1;
     }
 
+    /**
+     *
+     * @return discount
+     */
     public Double getDiscount() {
         return discount;
     }
+
+    /**
+     *
+     * @return price
+     */
     public Double getPrice() {
         return price;
     }
+
+    /**
+     *
+     * @return stock
+     */
     public Integer getStock() {
         return stock;
     }
+
+    /**
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
+
+    /**
+     *
+     * @return image
+     */
     public String getImage() {
         return image;
     }
+
+    /**
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param discount discount
+     */
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
+
+    /**
+     *
+     * @param price - price
+     */
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    /**
+     *
+     * @param stock - stock
+     */
     public void setStock(Integer stock) {
         if(stock < 0){
             throw new IllegalArgumentException("The requested product by the name: " + name + " with the id: " + id + " is out of stock.");
         }
         this.stock = stock;
     }
+
+    /**
+     *
+     * @param id - id
+     */
     public void setId(Long id) {
         this.id = id;
     }
+
+    /**
+     *
+     * @param image - image
+     */
     public void setImage(String image) {
         this.image = image;
     }
+
+    /**
+     *
+     * @param name - name
+     */
     public void setName(String name) {
         this.name = name;
     }

@@ -22,7 +22,7 @@ public class SessionListenerCounter implements HttpSessionListener {
 
     /**
      * Gets all the active sessions
-     * @return
+     * @return active sessions
      */
     public int getTotalActiveSession() {
         return activeSessions.get();

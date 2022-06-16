@@ -28,10 +28,10 @@ public class CartController {
     private ShoppingCart shoppingCart;
 
     /**
-     *
-     * @param id
-     * @param model
-     * @return
+     * The cart page
+     * @param id - The id of product
+     * @param model - model
+     * @return - Cart page
      */
     @GetMapping("/cart")
     public String cart(Long id, Model model){
@@ -46,6 +46,11 @@ public class CartController {
         return "cart";
     }
 
+    /**
+     * Checks out the cart.
+     * @param model - model
+     * @return The cart page
+     */
     @GetMapping("/checkout")
     public String checkout(Model model){
 
@@ -72,9 +77,14 @@ public class CartController {
             model.addAttribute("products", shoppingCart.getProducts());
         }
         model.addAttribute("cartQuantity", shoppingCart.getCartSize());
-        return "cart";
+        return "redirect:/cart";
     }
 
+    /**
+     * Clears the cart from products
+     * @param model - model
+     * @return - The cart page
+     */
     @GetMapping("/clearCart")
     public String clearCart(Model model){
         shoppingCart.clear();
@@ -84,9 +94,15 @@ public class CartController {
         model.addAttribute("products", shoppingCart.getProducts());
 
         model.addAttribute("cartQuantity", shoppingCart.getCartSize());
-        return "cart";
+        return "redirect:/cart";
     }
 
+    /**
+     * Removes product from card.
+     * @param id - The id of the desire product
+     * @param model - model
+     * @return The cart page.
+     */
     @GetMapping("/removeFromCart/{id}")
     public String removeFromCart(@PathVariable Long id, Model model){
 
@@ -96,6 +112,6 @@ public class CartController {
         model.addAttribute("products", shoppingCart.getProducts());
         model.addAttribute("quantities", shoppingCart.getQuantities());
         model.addAttribute("cartQuantity", shoppingCart.getCartSize());
-        return "cart";
+        return "redirect:/cart";
     }
 }
