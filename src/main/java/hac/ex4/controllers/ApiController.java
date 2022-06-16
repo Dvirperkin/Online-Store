@@ -50,18 +50,4 @@ public class ApiController {
         List<Product> products = productRepository.findFirst5ByNameContainsOrderByName(name);
         return products;
     }
-
-
-//    @GetMapping("/product/{id}")
-//    public Product getProduct(@PathVariable Long id){
-//        return productRepository.findProductById(id);
-//    }
-//
-//    @GetMapping("/products")
-//    public List<Product> allProduct() {
-//        return productRepository.findAll();
-//    }
-//
-//    @GetMapping("/top5products")
-//    public List<Product> top5() { return productRepository.findFirst5ByOrderByDiscountDesc(); }
 }

@@ -13,30 +13,57 @@ import java.util.HashMap;
 @Component
 public class ShoppingCart implements Serializable {
 
+    private HashMap<Long, Integer> quantities;
     private HashMap<Long, Product> products;
+    private double totalPrice;
 
     public ShoppingCart(){
+        this.totalPrice = 0;
         this.products = new HashMap<>();
+        this.quantities = new HashMap<>();
     }
 
     public HashMap<Long, Product> getProducts() {
         return products;
     }
+    public HashMap<Long, Integer> getQuantities() {
+        return quantities;
+    }
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
     public void setProducts(HashMap<Long, Product> products) {
         this.products = products;
     }
+    public void setQuantities(HashMap<Long, Integer> quantities) {
+        this.quantities = quantities;
+    }
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public void add(Product product) {
 
+        totalPrice += product.getPrice() * (1 - product.getDiscount() / 100);
+
         if(products.containsKey(product.getId())){
-            Product updatedProduct = products.get(product.getId());
-            updatedProduct.setQuantity(updatedProduct.getQuantity() + 1);
-            products.replace(product.getId(), updatedProduct);
+            quantities.replace(product.getId(), quantities.get(product.getId()) + 1);
             return;
         }
 
+        quantities.put(product.getId(), 1);
         products.put(product.getId(), product);
+    }
+    public void delete(Long id) {
+        totalPrice -= products.get(id).getPrice() * (1 - products.get(id).getDiscount() / 100);
+        products.remove(id);
+        quantities.remove(id);
+    }
+    public void clear() {
+        totalPrice = 0;
+        products.clear();
+        quantities.clear();
     }
 
     @Bean
