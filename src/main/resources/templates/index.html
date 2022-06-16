@@ -45,6 +45,11 @@
                        Price: <span th:text="${product.getPrice()}"></span> <br/>
                        Discount: <span th:text="${product.getDiscount()}"></span> <br/>
                        Final Price <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
+
+                       <button class="btn rounded" th:data-thing="quantity5ProductSpan + ${product.getId()}" onclick="incQuantities(this.getAttribute('data-thing'));">+</button>
+                       <span th:id="quantity5ProductSpan + ${product.getId()}">0</span>
+                       <button class="btn rounded" th:data-thing="quantity5ProductSpan + ${product.getId()}" onclick="decQuantities(this.getAttribute('data-thing'));">-</button> <br/>
+
                        <button th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
                    </div>
                </div>
@@ -75,9 +80,9 @@
                         Discount: <span th:text="${product.getDiscount()}"></span> <br/>
                         Final Price <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
 
-                        <button class="btn rounded" th:data-thing="${product.getId()}" onclick="incQuantities(this.getAttribute('data-thing'));">+</button>
+                        <button class="btn rounded" th:data-thing="quantityProductSpan + ${product.getId()}" onclick="incQuantities(this.getAttribute('data-thing'));">+</button>
                         <span th:id="quantityProductSpan + ${product.getId()}">0</span>
-                        <button class="btn rounded" th:data-thing="${product.getId()}" onclick="decQuantities(this.getAttribute('data-thing'));">-</button> <br/>
+                        <button class="btn rounded" th:data-thing="quantityProductSpan + ${product.getId()}" onclick="decQuantities(this.getAttribute('data-thing'));">-</button> <br/>
 
                         <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
                     </div>

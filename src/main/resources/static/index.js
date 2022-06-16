@@ -10,12 +10,12 @@ function addToCart(productId) {
         .catch()
 }
 
-function incQuantities(productId){
-    let quantitySpan = document.getElementById("quantityProductSpan" + productId)
+function incQuantities(quantitySpanId){
+    let quantitySpan = document.getElementById(quantitySpanId)
     quantitySpan.innerText = (parseInt(quantitySpan.innerText) + 1).toString()
 }
-function decQuantities(productId){
-    let quantitySpan = document.getElementById("quantityProductSpan" + productId)
+function decQuantities(quantitySpanId){
+    let quantitySpan = document.getElementById(quantitySpanId)
     let newQuantity = (parseInt(quantitySpan.innerText) - 1)
     quantitySpan.innerText = (newQuantity >= 0) ? newQuantity.toString() : 0
 }
