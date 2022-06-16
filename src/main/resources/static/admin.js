@@ -10,8 +10,8 @@
         document.getElementById("ToUpdateDiscount").addEventListener("change", trimInput)
         document.getElementById("ToUpdateStock").addEventListener("change", trimInput)
         document.getElementById("ToDeleteID").addEventListener("change", trimInput)
-
     })
+
     function trimInput(event){
         event.target.value = event.target.value.trim()
     }

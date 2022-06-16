@@ -13,9 +13,28 @@
     <div class="container">
         <div th:insert="fragments/navigator.html" :: body></div>
         <div th:insert="fragments/searchbar.html" :: body></div>
-        <h1 th:text="${product.name}"></h1>
-        Price: <span th:text="${product.getPrice()}"></span> Price After Discount <span th:text="${(product.getPrice() * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
-        <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+        <div class="row">
+            <div class="col-2 bg-light rounded">
+                <div class="row m-0">
+                    <div class="col">
+                        <h1 th:text="${product.getName()}"></h1>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col">
+                        <img class="w-75 h-75" th:src="${product.getImage()}">
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col">
+                        Price: <span th:text="${product.getPrice()}"></span> <br/>
+                        Discount: <span th:text="${product.getDiscount()}"></span> <br/>
+                        Final Price <span th:text="${(product.price * (1 - ( product.getDiscount() / 100 )))}"></span> <br/>
+                        <button  th:data-thing="${product.getId()}" onclick="addToCart(this.getAttribute('data-thing'));">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

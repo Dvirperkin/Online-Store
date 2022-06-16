@@ -19,14 +19,15 @@ public class Product implements Serializable {
 
     private String image = "ProductImage.png";
 
-    @Min(0)
+    @NotNull(message = "Stock is mandatory")
+    @PositiveOrZero(message = "Stock must be positive or zero")
     private Integer stock = 1;
 
-    @Min(0)
+    @PositiveOrZero(message = "Price must be positive or zero")
     private Double price;
 
-    @Min(0)
-    @Max(100)
+    @Min(value = 0, message = "Discount must be between 0% to 100%")
+    @Max(value = 100, message = "Discount must be between 0% to 100%")
     private Double discount;
 
     public Product(){}
@@ -68,7 +69,7 @@ public class Product implements Serializable {
     }
     public void setStock(Integer stock) {
         if(stock < 0){
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("The requested product is out of stock");
         }
         this.stock = stock;
     }

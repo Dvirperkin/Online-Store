@@ -3,6 +3,7 @@ package hac.ex4.controllers;
 import hac.ex4.beans.ShoppingCart;
 import hac.ex4.database.Product;
 import hac.ex4.database.ProductRepository;
+import hac.ex4.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,10 @@ import java.util.List;
 @RequestMapping("/api")
 
 public class ApiController {
+
+    @Autowired
+    private ProductService productService;
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -29,13 +34,15 @@ public class ApiController {
      * @param model
      * @return ResponseEntity which contains the answer of the response.
      */
-    @GetMapping("/addToCart/{id}")
-    public ResponseEntity addToCart(@PathVariable Long id, Model model){
+    @GetMapping("/addToCart/{id}/{quantity}")
+    public ResponseEntity addToCart(@PathVariable Long id, @PathVariable Integer quantity, Model model){
 
-        Product product = productRepository.findProductById(id);
-        shoppingCart.add(product);
-        model.addAttribute("message" , "Successfully Added!");
-        model.addAttribute("addedState", "text-bg-success");
+        if(quantity > 0){
+            Product product = productRepository.findProductById(id);
+            shoppingCart.add(product, quantity);
+            model.addAttribute("message" , "Successfully Added!");
+            model.addAttribute("addedState", "text-bg-success");
+        }
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
