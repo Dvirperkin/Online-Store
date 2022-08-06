@@ -10,4 +10,3 @@
 
 <h1>Assumptions</h1>
 <p>The admin will insert image using url.</p>
-<p>We assume there is no collision problem when several threads try to do checkout in the cart. (After we spoke with solange)</p>
